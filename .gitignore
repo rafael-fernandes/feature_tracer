@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+.idea/
+.generators
+.rakeTasks
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
