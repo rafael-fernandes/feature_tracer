@@ -6,4 +6,8 @@ class Post < ApplicationRecord
   def truncated_desc(max_size)
     self.description.truncate(max_size)
   end
+
+  def create_date
+    self.created_at.strftime("%d/%m/%y")
+  end
 end
