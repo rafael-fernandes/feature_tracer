@@ -12,7 +12,7 @@ Aspect.new :around, :calls_to => :all_methods,
     p "Entering: #{names}: args = #{args.inspect}"
     file_name = "#{Rails.root}/tmp/#{jp.target_type.name}.rb"
     file = File.new file_name, 'a'
-    string_to_write = "{class: #{jp.target_type.name}, method: '#{jp.method_name}', args: #{args.inspect}}"
+    string_to_write = "{method: '#{jp.method_name}', args: #{args.inspect}}"
     unless File.open(file_name).lines.any?{|line| line.include?(string_to_write)}
       file.puts string_to_write
     end
