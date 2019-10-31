@@ -1,14 +1,22 @@
 require 'aquarium'
 include Aquarium::Aspects
 
-puts "Aquarium aspect tracing initialized"
-Aspect.new :around, :calls_to => :all_methods,
-           :for_types => [Post, PostsController],
-           :method_options => :exclude_ancestor_methods do |jp, obj, *args|
+# Load Rails constants
+Rails.application.eager_load!
 
-  
+# Get Rails models and controllers classes
+controllers = ApplicationController.subclasses
+models = ApplicationRecord.subclasses
+
+puts "Aspects initialized"
+
+Aspect.new(:around,
+           calls_to: :all_methods,
+           for_types: models + controllers,
+           method_options: :exclude_ancestor_methods) do |jp, obj, *args|
   begin
     names = "#{jp.target_type.name}##{jp.method_name}"
+    p obj
     p "Entering: #{names}: args = #{args.inspect}"
     file_name = "#{Rails.root}/tmp/#{jp.target_type.name}.rb"
     file = File.new file_name, 'a'
