@@ -15,19 +15,39 @@ Aspect.new(:around,
            for_types: models + controllers,
            method_options: :exclude_ancestor_methods) do |jp, obj, *args|
   begin
-    names = "#{jp.target_type.name}##{jp.method_name}"
-    p obj
-    p "Entering: #{names}: args = #{args.inspect}"
-    file_name = "#{Rails.root}/tmp/#{jp.target_type.name}.rb"
-    file = File.new file_name, 'a'
-    string_to_write = "{class: #{jp.target_type.name}, method: :#{jp.method_name}, args: #{args.inspect}}"
-    unless File.open(file_name).lines.any?{|line| line.include?(string_to_write)}
-      file.puts string_to_write
+    # Get class
+    klass = jp.target_type.name.constantize
+    # puts klass
+
+    # List all klass public instance methods
+    if models.include? klass
+      public_instance_methods = (klass.public_instance_methods - Object.public_instance_methods).sort
+      # puts public_instance_methods
+    end
+
+    # Get method
+    method = jp.method_name.to_sym
+    # puts method
+
+    # Get object current state
+    if models.include? klass
+      current_state = obj.attributes
+      # puts current_state
+    end
+
+    # Create temp file
+    file_name ="#{Rails.root}/tmp/#{klass.to_s}.rb"
+
+    file = File.new(file_name, 'a')
+
+    str = "{ class: #{klass}, method: #{method}, args: #{args.inspect}, current_state: #{current_state} }"
+
+    unless File.open(file_name).lines.any?{|line| line.include?(str)}
+      file.puts str
     end
     
     jp.proceed
   ensure
-    p "Leaving:  #{names}: args = #{args.inspect}"
     file.close
   end
 end
