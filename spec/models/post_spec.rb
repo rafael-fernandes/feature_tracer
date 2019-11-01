@@ -5,7 +5,7 @@ RSpec.describe Post, :type => :model do
     expect(Post.new).to be_valid
   end
 
-  it "truncate desc should ..." do
-    #pending
+  it "it should return a string with same size as parameter" do
+    expect(args[0]).to eq length(string)
   end
 end
