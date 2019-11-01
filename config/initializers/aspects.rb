@@ -42,7 +42,7 @@ Aspect.new(:around,
 
     str = "{ class: #{klass}, method: #{method}, args: #{args.inspect}, current_state: #{current_state} }"
 
-    unless File.open(file_name).lines.any?{|line| line.include?(str)}
+    unless File.open(file_name).lines.any? { |line| line.include?(str)}
       file.puts str
     end
     
