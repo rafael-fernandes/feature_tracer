@@ -16,16 +16,34 @@ RSpec.describe #{class_name}, :type => :#{class_type} do
   it "is valid with valid attributes" do
     expect(#{class_name}.new).to be_valid
   end
-end
 }
     File.readlines("#{Rails.root}/tmp/#{class_name}.rb").each do |line|
       json_string = JSON.parse(line.strip)
-      puts "Reflecting..."
+      puts "\nReflecting..."
       reflector = Reflect::Reflector.new
-      puts reflector.reflect(json_string["klass"], json_string["method"], json_string["current_state"], json_string["args"])
+      klass = json_string["klass"]
+      meth = json_string["method"]
+      cs = json_string["current_state"]
+      args = json_string["args"]
+      puts "Executando #{klass}::#{meth} com argumentos #{args} no objeto #{cs}"
+      reflection = reflector.reflect(klass, meth, cs, args)
+      puts "Resultado: #{reflection}"
+      print "\n"
+
+      template_aux = %Q{
+  it "should return valid string for method #{meth}" do
+    #{class_name.downcase} = #{class_name}.new(#{cs})
+    expect(#{class_name.downcase}.#{meth}(#{args.join(', ')})).to eq "#{reflection}"
+  end
+      }
+      template.concat(template_aux)
     end
 
-    create_file "spec/models/#{file_name}_spec.rb", template
+    template.concat(%Q{
+end
+                    })
+
+    create_file "spec/#{class_type}s/#{file_name}_spec.rb", template
 
     puts "Testes criados."
   end
