@@ -4,8 +4,7 @@
 #index steps
 Dado("que existam {int} posts criados") do |number_of_posts|
   number_of_posts.times do |i|
-    Post.create(title: "Post #{i}", description: "Esse é o post #{i} post #{i}
-    post #{i} post #{i} post #{i} post #{i} post #{i}")
+    Post.create(title: "Post #{i}", description: "Esse é o post #{i} post #{i} post #{i} post #{i} post #{i} post #{i} post #{i}")
   end
 end
 

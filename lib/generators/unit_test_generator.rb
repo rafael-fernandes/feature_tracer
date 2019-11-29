@@ -18,8 +18,8 @@ RSpec.describe #{class_name}, :type => :#{class_type} do
 end
 }
     File.readlines("#{Rails.root}/tmp/#{class_name}.rb").each do |line|
-      json_string = (line.strip)
-      puts json_string
+      json_string = JSON.parse(line.strip)
+      puts json_string["klass"]
     end
 
     create_file "spec/models/#{file_name}_spec.rb", template
