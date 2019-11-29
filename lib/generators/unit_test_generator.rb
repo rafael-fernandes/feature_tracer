@@ -1,6 +1,7 @@
 class UnitTestGenerator < Rails::Generators::Base
   def create_unit_tests
     require 'json'
+    require 'gemaina/reflector'
     class_name = args[0]
     file_name = class_name.downcase
     puts "criando testes unitarios para #{class_name}..."
@@ -19,7 +20,9 @@ end
 }
     File.readlines("#{Rails.root}/tmp/#{class_name}.rb").each do |line|
       json_string = JSON.parse(line.strip)
-      puts json_string["klass"]
+      puts "Reflecting..."
+      reflector = Reflect::Reflector.new
+      puts reflector.reflect(json_string["klass"], json_string["method"], json_string["current_state"], json_string["args"])
     end
 
     create_file "spec/models/#{file_name}_spec.rb", template
