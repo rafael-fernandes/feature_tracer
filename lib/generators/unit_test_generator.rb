@@ -10,11 +10,15 @@ class UnitTestGenerator < Rails::Generators::Base
     if is_controller
       class_type = "controller"
     end
+    first_line = File.open("#{Rails.root}/tmp/#{class_name}.rb", &:readline)
+    sample_object = JSON.parse(first_line)["current_state"]
     template = %Q{require 'rails_helper'
 
 RSpec.describe #{class_name}, :type => :#{class_type} do
+  let(:#{file_name}) { #{class_name}.new(#{sample_object}) }
+
   it "is valid with valid attributes" do
-    expect(#{class_name}.new).to be_valid
+    expect(#{file_name}).to be_valid
   end
 }
     executed_methods = []
@@ -38,15 +42,16 @@ RSpec.describe #{class_name}, :type => :#{class_type} do
       else # other test for other method
         executed_methods.push(class_and_method_name)
         executed_arguments[class_and_method_name.to_sym] = []
-        puts "Executando #{klass}::#{meth} com argumentos #{args} no objeto #{cs}"
-        reflection = reflector.reflect(klass, meth, cs, args)
+        puts "Executando #{klass}::#{meth} com argumentos #{args} no objeto #{sample_object}"
+        reflection = reflector.reflect(klass, meth, sample_object, args)
         puts "Resultado: #{reflection}"
         print "\n"
 
         template_aux = %Q{
-  it "should return valid string for method #{meth}" do
-    #{class_name.downcase} = #{class_name}.new(#{cs})
-    expect(#{class_name.downcase}.#{meth}(#{args.join(', ')})).to eq "#{reflection}"
+  describe '##{meth}' do
+    it "should return valid string for method #{meth}" do
+      expect(#{class_name.downcase}.#{meth}(#{args.join(', ')})).to eq "#{reflection}"
+    end
   end
       }
         template.concat(template_aux)
