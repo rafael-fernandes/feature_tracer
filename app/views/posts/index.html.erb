@@ -2,6 +2,11 @@
 
 <h1>Posts</h1>
 
+<% if params[:truncate_size] %>
+  <%= link_to "Voltar ao normal", posts_path %>
+<% else %>
+  <%= link_to "Ver com truncamento 10", posts_path(truncate_size: 10) %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -16,7 +21,7 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.upcase_title %></td>
-        <td><%= post.truncated_desc(30) %></td>
+        <td><%= post.truncated_desc((params[:truncate_size] || 30).to_i) %></td>
         <td><%= post.create_date %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
