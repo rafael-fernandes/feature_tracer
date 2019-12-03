@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, :type => :model do
-  let(:post) { Post.new({"id"=>164, "title"=>"Post 0", "description"=>"Esse é o post 0 post 0 post 0 post 0 post 0 post 0 post 0", "created_at"=>"2019-12-03T18:42:03.412Z", "updated_at"=>"2019-12-03T18:42:03.412Z"}) }
+  let(:post) { Post.new({"id"=>168, "title"=>"Post 0", "description"=>"Esse é o post 0 post 0 post 0 post 0 post 0 post 0 post 0", "created_at"=>"2019-12-03T21:12:41.900Z", "updated_at"=>"2019-12-03T21:12:41.900Z"}) }
 
   it "is valid with valid attributes" do
     expect(post).to be_valid
