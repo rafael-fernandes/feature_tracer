@@ -14,6 +14,12 @@ Funcionalidade: posts
     Quando eu clicar no link para "posts"
     Entao eu devo ver a lista de postagens com 2 itens
 
+  Cenario: Listar posts com truncamento diferente
+    Dado que existam 2 posts criados
+    Dado que eu esteja na página inicial
+    Quando eu clicar no link para "posts"
+    E eu clicar no link para "Ver com truncamento 10"
+    Entao eu devo ver a lista de postagens com 2 itens
   #create
   Cenário: Criar um posts
 
