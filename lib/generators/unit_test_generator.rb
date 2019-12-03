@@ -113,7 +113,7 @@ end
                     })
     end
 
-    create_file "spec/#{class_type}s/#{file_name}_spec.rb", template
+    create_file "spec/#{class_type}s/#{file_name.sub('controller', '_controller')}_spec.rb", template
 
     puts "Testes criados."
   end
