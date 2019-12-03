@@ -15,7 +15,7 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
+        <td><%= post.upcase_title %></td>
         <td><%= post.truncated_desc(30) %></td>
         <td><%= post.create_date %></td>
         <td><%= link_to 'Show', post %></td>

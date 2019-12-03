@@ -40,9 +40,9 @@ Aspect.new(:around,
 
     file = File.new(file_name, 'a')
 
-    str = "{ class: #{klass}, method: #{method}, args: #{args.inspect}, current_state: #{current_state} }"
+    str = "{ \"klass\": \"#{klass}\", \"method\": \"#{method}\", \"args\": #{args.inspect}, \"current_state\": #{current_state.to_json} }"
 
-    unless File.open(file_name).lines.any? { |line| line.include?(str)}
+    unless File.open(file_name).each_line.any? { |line| line.include?(str)}
       file.puts str
     end
     
