@@ -17,7 +17,6 @@ class UnitTestGenerator < Rails::Generators::Base
       template = %Q{require 'rails_helper'
 
 RSpec.describe #{class_name}, :type => :#{class_type} do
-
 }
       File.readlines("#{Rails.root}/tmp/#{class_name}.rb").each do |line|
         json_string = JSON.parse(line.strip)
