@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  validates :title, presence: true
+
   def test(name)
     puts "test #{name}"
   end
