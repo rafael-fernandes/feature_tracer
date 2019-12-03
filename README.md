@@ -1,24 +1,5 @@
-# README
+# Gemaína Tracer
+## Criação de testes funcionais a partir de cenários BDD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Rode o cucumber no projeto, isso irá gerar arquivos temporários que trackeiam cada método de controller e de models que são utilizados naquele cenário
+- Utilize o comando ```rails g unit_test Model``` para gerar testes unitários a partir do tracking do cenário BDD
