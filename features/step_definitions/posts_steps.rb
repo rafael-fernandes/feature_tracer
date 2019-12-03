@@ -18,7 +18,7 @@ end
 
 Entao("eu devo ver a lista de postagens com {int} itens") do |number_of_posts|
   number_of_posts.times do |i|
-    expect(page).to have_content "Post #{i}"
+    expect(page).to have_content "POST #{i}"
   end
 end
 

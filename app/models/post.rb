@@ -10,4 +10,8 @@ class Post < ApplicationRecord
   def create_date
     self.created_at.strftime("%d/%m/%y")
   end
+
+  def upcase_title
+    self.title.upcase
+  end
 end
