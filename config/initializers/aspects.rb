@@ -13,7 +13,7 @@ puts "Aspects initialized"
 Aspect.new(:around,
            calls_to: :all_methods,
            for_types: models + controllers,
-           method_options: :exclude_ancestor_methods) do |jp, obj, *args|
+           method_options: [:exclude_ancestor_methods, :class]) do |jp, obj, *args|
   begin
     # Get class
     klass = jp.target_type.name.constantize
@@ -31,7 +31,10 @@ Aspect.new(:around,
 
     # Get object current state
     if models.include? klass
-      current_state = obj.attributes
+      if obj.class == Class
+      else
+        current_state = obj.attributes
+      end
       # puts current_state
     end
 
@@ -48,6 +51,8 @@ Aspect.new(:around,
     
     jp.proceed
   ensure
-    file.close
+    if file
+      file.close
+    end
   end
 end
