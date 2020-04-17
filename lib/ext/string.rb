@@ -6,4 +6,8 @@ class String
   def is_email?
     /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i === self
   end
+
+  def is_float?
+    self.to_f.to_s === self
+  end
 end
