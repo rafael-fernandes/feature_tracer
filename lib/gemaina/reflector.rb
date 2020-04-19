@@ -6,7 +6,11 @@ module Reflect
       else
         @instance = Object.const_get(klass).new(attributes)
       end
-      @instance.send(method, *args)
+      if Object.const_get(klass).respond_to?(method) # class method
+        Object.const_get(klass).send(method, *args)
+      else
+        @instance.send(method, *args)
+      end
     end
   end
 end
