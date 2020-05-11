@@ -1,4 +1,12 @@
 class String
+  # strings de cada classe de equivalência para testes
+  INT_STRING = "3"
+  EMAIL_STRING = "genaina@email.com"
+  FLOAT_STRING = "3.14"
+  PHONE_STRING = "(61) 98999-9999"
+  DATE_STRING = "12/01/1997"
+
+  CUSTOM_METHODS = %w(is_i? is_email? is_float? is_phone? is_date?)
   def is_i?
     /\A[-+]?\d+\z/ === self
   end
