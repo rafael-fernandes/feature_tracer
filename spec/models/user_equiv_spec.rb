@@ -13,8 +13,8 @@ RSpec.describe User, :type => :model do
   describe '#find_by_phone_equivalence_class' do
     # 2 entries with this class
     it "arguments should belong to PHONE equivalence class" do
-      # expect(User).to receive(:find_by_phone).with("(61) 98999-9999")
-      # User.find_by_email_address("(61) 98999-9999")
+      expect(User).to receive(:find_by_phone).with("(61) 98999-9999")
+      User.find_by_email_address("(61) 98999-9999")
     end
   end
       
