@@ -297,7 +297,9 @@
         1,
         2,
         2,
-        null
+        null,
+        null,
+        1
       ],
       "/Users/nicknish/Projects/feature_tracer/lib/test_generator.rb": [
         1,
@@ -328,7 +330,7 @@
         null,
         3,
         null,
-        210,
+        48,
         3,
         null,
         null,
@@ -783,6 +785,6 @@
         null
       ]
     },
-    "timestamp": 1602688183
+    "timestamp": 1602691021
   }
 }
