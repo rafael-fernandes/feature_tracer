@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   validates :title, presence: true
-
+  include TestGenerator::Observer
   def truncated_desc(max_size)
     self.description.truncate(max_size)
   end
