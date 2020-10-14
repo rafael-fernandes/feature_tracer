@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, :type => :model do
-  let(:post) { Post.new({"id"=>176, "title"=>"Post 0", "description"=>"Esse é o post 0 post 0 post 0 post 0 post 0 post 0 post 0", "created_at"=>"2019-12-04T17:22:24.659Z", "updated_at"=>"2019-12-04T17:22:24.659Z"}) }
+  let(:post) { Post.new({"id"=>29, "title"=>"Post 0", "description"=>"Esse é o post 0 post 0 post 0 post 0 post 0 post 0 post 0", "created_at"=>"2020-07-23T00:06:15.488Z", "updated_at"=>"2020-07-23T00:06:15.488Z"}) }
 
   it "is valid with valid attributes" do
     expect(post).to be_valid
@@ -21,7 +21,7 @@ RSpec.describe Post, :type => :model do
       
   describe '#create_date' do
     it "should return valid string for method create_date" do
-      expect(post.create_date()).to eq "04/12/19"
+      expect(post.create_date()).to eq "23/07/20"
     end
   end
       
