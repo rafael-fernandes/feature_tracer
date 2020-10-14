@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe <%= @klass %>, type: :model do<% @validations_specs.each do |validation| %>
+RSpec.describe <%= @klass %>, type: :model do
+  let(:<%= @klass.downcase %>) { create(:<%= @klass.downcase %>) } <% @validations_specs.each do |validation| %>
   <%= validation %>
 <% end %><% @associations_specs.each do |association| %>
   <%= association %>

@@ -1,29 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe Post, :type => :model do
-  let(:post) { Post.new({"id"=>29, "title"=>"Post 0", "description"=>"Esse é o post 0 post 0 post 0 post 0 post 0 post 0 post 0", "created_at"=>"2020-07-23T00:06:15.488Z", "updated_at"=>"2020-07-23T00:06:15.488Z"}) }
-
-  it "is valid with valid attributes" do
-    expect(post).to be_valid
-  end
+RSpec.describe Post, type: :model do
+  let(:post) { create(:post) } 
+  it { should validate_presence_of(:title) }
 
   describe '#upcase_title' do
-    it "should return valid string for method upcase_title" do
+    it 'should' do
       expect(post.upcase_title()).to eq "POST 0"
     end
   end
-      
+
   describe '#truncated_desc' do
-    it "should return valid string for method truncated_desc" do
+    it 'should' do
       expect(post.truncated_desc(30)).to eq "Esse é o post 0 post 0 post..."
     end
   end
-      
+
   describe '#create_date' do
-    it "should return valid string for method create_date" do
-      expect(post.create_date()).to eq "23/07/20"
+    it 'should' do
+      expect(post.create_date()).to eq "14/10/20"
     end
   end
-      
 end
-                    

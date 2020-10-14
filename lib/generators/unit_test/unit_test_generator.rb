@@ -16,10 +16,26 @@ class UnitTestGenerator < Rails::Generators::NamedBase
     @methods_specs = []
     @validations_specs = []
     @associations_specs = []
-    
+    @factory_args = []
+
+    executed_methods = [] # array to store the executed methods to avoid duplicity
+    executed_arguments = {} # hash to store the executed arguments to avoid duplicity
     # Generate methods specs
     lines.each do |line|
-      @methods_specs << method_specs(line)
+      klass, method_name, args, attrs, response = destruct(line)
+      class_and_method_name = "#{klass}::#{method_name}"
+      if executed_methods.include?(class_and_method_name)
+        if executed_arguments[class_and_method_name.to_sym].include?(args)
+          # do nothing, same test
+        else
+          # same test with other arguments
+          executed_arguments[class_and_method_name.to_sym].push(args)
+        end
+      else # other test for other method
+        executed_methods.push(class_and_method_name)
+        executed_arguments[class_and_method_name.to_sym] = []
+        @methods_specs << method_specs(line)
+      end
     end
 
     # Generate association specs
@@ -41,5 +57,6 @@ class UnitTestGenerator < Rails::Generators::NamedBase
     @validations_specs = @validations_specs.flatten.uniq.compact
 
     template "model_spec.rb", Rails.root.join("spec/models/#{class_name.downcase}_spec.rb")
+    template "factory_template.rb", Rails.root.join("spec/factories/#{class_name.pluralize.downcase}.rb")
   end
 end

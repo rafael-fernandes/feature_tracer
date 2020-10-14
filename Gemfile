@@ -43,6 +43,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'aquarium'
   gem 'cucumber-rails', require: false
+  gem 'shoulda-matchers', '~> 4.0'
+  gem 'factory_bot_rails'
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.8'
