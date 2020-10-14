@@ -20,6 +20,15 @@ class UnitTestGenerator < Rails::Generators::NamedBase
 
     executed_methods = [] # array to store the executed methods to avoid duplicity
     executed_arguments = {} # hash to store the executed arguments to avoid duplicity
+
+    denylist = ["updated_at", "created_at", "id"]
+    # creating the factory arguments
+    lines.first['attrs'].keys.each do |key|
+      unless denylist.include?(key)
+        @factory_args.push("#{key} { \"#{lines.first['attrs'][key]}\" }")
+      end
+    end
+
     # Generate methods specs
     lines.each do |line|
       klass, method_name, args, attrs, response = destruct(line)
