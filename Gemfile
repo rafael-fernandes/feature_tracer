@@ -45,6 +45,7 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'shoulda-matchers', '~> 4.0'
   gem 'factory_bot_rails'
+  gem 'test_generator', path: '../TestGenerator'
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.8'

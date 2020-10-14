@@ -1,3 +1,10 @@
+PATH
+  remote: ../TestGenerator
+  specs:
+    test_generator (1.2)
+      factory_bot_rails
+      shoulda-matchers (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://oss:x16NKeRblTJRwVBhBnqnV9e79t7gvUFT@gem.mutant.dev/
@@ -325,6 +332,7 @@ DEPENDENCIES
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
+  test_generator!
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
